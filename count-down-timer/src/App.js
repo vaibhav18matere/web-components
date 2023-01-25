@@ -1,5 +1,5 @@
 import "./App.css";
-import Timer from "./Timer";
+import TimerWrapper from "./Timer/TimerWrapper";
 
 function App() {
   const onExpired = () => {
@@ -8,8 +8,8 @@ function App() {
 
   return (
     <div className="App">
-      <Timer onExpired={onExpired} duration={2 * 60 * 60 * 60 * 1000} />
-      {/* change the time duration from here */}
+      <TimerWrapper onExpired={onExpired} duration={15 * 1000} />
+      {/* change the timer duration from here */}
     </div>
   );
 }

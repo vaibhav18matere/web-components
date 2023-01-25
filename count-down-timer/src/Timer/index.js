@@ -40,8 +40,4 @@ const Timer = ({ duration, onExpired }) => {
   return getFormatedTime(time);
 };
 
-Timer.defaultProps = {
-  duration: 60 * 1000,
-};
-
 export default Timer;
