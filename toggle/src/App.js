@@ -6,24 +6,32 @@ function App(props) {
 
   console.log(coworkers);
 
-  const initialStae = coworkers.reduce((a, b) => {
+  const initialState = coworkers.reduce((a, b) => {
     const name = b.first_name + b.last_name;
     a[name] = true;
-    // to set all status online by default
+    // to set all status online by default => true
     return a;
   }, {});
 
-  const [employeeStatus, setEmployeeStatus] = useState(initialStae);
+  const [employeeStatus, setEmployeeStatus] = useState(initialState);
+
+  const toggleStatusHandler = (name) => {
+    setEmployeeStatus({ ...employeeStatus, [name]: !employeeStatus[name] });
+  };
 
   return coworkers.map(({ first_name, last_name }) => {
     const name = first_name + last_name;
 
     return (
       <>
-        <div key={name}>
-          <h3>
+        <div
+          className="employee_component"
+          key={name}
+          onClick={() => toggleStatusHandler(name)}
+        >
+          <p>
             Name : {first_name} {last_name}
-          </h3>
+          </p>
           <h4>Status : {employeeStatus[name] ? "Online" : "Offline"}</h4>
         </div>
       </>
