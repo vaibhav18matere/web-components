@@ -1,22 +1,41 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 
 function App(props) {
   const { coworkers } = props;
+
   console.log(coworkers);
 
-  return (
-    <div className="App">
-      <h1>Status Toggler</h1>
-    </div>
-  );
+  const initialStae = coworkers.reduce((a, b) => {
+    const name = b.first_name + b.last_name;
+    a[name] = true;
+    // to set all status online by default
+    return a;
+  }, {});
+
+  const [employeeStatus, setEmployeeStatus] = useState(initialStae);
+
+  return coworkers.map(({ first_name, last_name }) => {
+    const name = first_name + last_name;
+
+    return (
+      <>
+        <div key={name}>
+          <h3>
+            Name : {first_name} {last_name}
+          </h3>
+          <h4>Status : {employeeStatus[name] ? "Online" : "Offline"}</h4>
+        </div>
+      </>
+    );
+  });
 }
 
 App.defaultProps = {
   coworkers: [
     { first_name: "Vaibhav", last_name: "Matere" },
-    { first_name: "Shubham", last_name: "Matere" },
-    { first_name: "Deepak", last_name: "Matere" },
+    { first_name: "Shubham", last_name: "Smith" },
+    { first_name: "Deepak", last_name: "Warner" },
   ],
 };
 
